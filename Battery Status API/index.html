@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script>
+      window.onload = () => {
+        if ("getBattery" in navigator) {
+          let reso = document.getElementById("res");
+          navigator.getBattery().then((battery) => {
+            console.log(battery);
+
+            function logInfos() {
+              let batterinfo = `Your device is ${
+                battery.charging ? "charging" : "not charging"
+              }<br> Battery level is ${battery.level}`;
+              reso.innerHTML = batterinfo;
+            }
+            logInfos();
+            battery.onchargingchange = () => {
+              logInfos();
+            };
+            battery.onlevelchange = () => {
+              logInfos();
+            };
+          });
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <p id="res"></p>
+  </body>
+</html>
