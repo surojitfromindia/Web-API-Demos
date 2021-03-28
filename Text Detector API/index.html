@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <script>
+      function writeLog(message) {
+        const newState = document.createElement("p");
+        newState.innerHTML = message;
+        document.getElementById("target").appendChild(newState);
+      }
+
+      function detectText() {
+        if (!("TextDetector" in window)) {
+          alert("TextDetector is not available");
+          return;
+        }
+
+        const file = document.getElementById("file").files[0];
+
+        document.getElementById("target").innerHTML = "";
+        const detector = new TextDetector();
+
+        createImageBitmap(file)
+          .then((image) => detector.detect(image))
+          .then((results) => {
+            if (results.length) {
+              results.forEach((result) => {
+                writeLog(`${result.rawValue} `);
+              });
+            } else {
+              writeLog("No texts detected.");
+            }
+          })
+          .catch((err) => writeLog("Text detection error: " + err));
+      }
+    </script>
+  </head>
+  <body>
+    <p>Upload an image: <input type="file" id="file" accept="image/*" /></p>
+    <div>
+      <button onclick="detectText()">Detect Text</button>
+    </div>
+    <div id="target"></div>
+  </body>
+</html>

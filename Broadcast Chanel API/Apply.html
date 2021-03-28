@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <style>
+      input {
+        display: block;
+      }
+    </style>
+    <script>
+      let broad = new BroadcastChannel("apply_broadcast");
+      const handleApply = () => {
+        broad.postMessage(document.querySelector("#name").value);
+      };
+    </script>
+  </head>
+  <body>
+    <input id="name" type="text" placeholder="Type here" />
+    <input type="button" value="Apply" onclick="handleApply()" />
+  </body>
+</html>

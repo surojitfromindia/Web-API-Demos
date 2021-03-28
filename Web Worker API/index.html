@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script>
+      window.onload = () => {
+        let w;
+        document.querySelector("#btnStart").onclick = () => {
+          if (typeof w == "undefined") {
+            //worker has options
+            //check it later
+            w = new Worker("NameCreator.js");
+          }
+          w.onmessage = (ev) => {
+            document.querySelector("#names").innerHTML = ev.data;
+          };
+        };
+        document.querySelector("#btnStop").onclick = () => {
+          w.terminate();
+          w = undefined;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <h2 id="names"></h2>
+
+    <button id="btnStart">Start getting name</button>
+    <button id="btnStop">Stop getting name</button>
+  </body>
+</html>

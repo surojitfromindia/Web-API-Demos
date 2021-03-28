@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <style>
+      input {
+        display: block;
+      }
+    </style>
+    <script>
+      let broad = new BroadcastChannel("apply_broadcast");
+      const handleApply = () => {
+        broad.postMessage(document.querySelector("#name").value);
+      };
+      broad.onmessage = (ev) => {
+          console.log(ev);
+        document.querySelector("#appliedname").innerHTML = ev.data;
+      };
+    </script>
+  </head>
+  <body>
+    <p id="appliedname"></p>
+  </body>
+</html>
