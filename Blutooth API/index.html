@@ -1,9 +1,12 @@
 <html>
   <head>
     <script>
-      if ("bluetooth" in navigator) {
-        console.log(true);
-      }
+      window.onload = () => {
+        if ("bluetooth" in navigator) {
+          document.querySelector("#res").innerHTML =
+            "your device support Bluetooth";
+        }
+      };
     </script>
   </head>
   <body>
