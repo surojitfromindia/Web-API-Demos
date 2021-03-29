@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      document.addEventListener("copy", (ev) => {
+        console.log(ev.clipboardData);
+      });
+      const handlepaste = (ev) => {
+        navigator.clipboard.readText().then((copiedtext) => {
+          document.querySelector("#pb").value = copiedtext;
+        });
+      };
+      const handlecopy = (ev) => {
+        let textfrombox = document.querySelector("#pb").value;
+
+        navigator.clipboard.writeText(textfrombox).then(() => {
+          alert("Copied To Clipboard");
+        });
+      };
+    </script>
+    <style>
+      p {
+        margin-top: 0.05rem;
+      }
+      .war {
+        color: rgb(243, 111, 111);
+        font-weight: 700;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          margin: auto;
+          flex-direction: column;
+          width: 80vmin;
+        "
+      >
+        <p>Copy a text from anywhere you like then click paste</p>
+        <p class="war">
+          This Need Your Permission To Write Content To System Clipboard
+        </p>
+        <button onclick="handlepaste()">Paste</button>
+        <textarea
+          style="margin: 0.57rem 0"
+          id="pb"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <button onclick="handlecopy()">Copy</button>
+      </div>
+    </div>
+  </body>
+</html>
